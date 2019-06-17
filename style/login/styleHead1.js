@@ -21,7 +21,7 @@ const stylesHead1 = StyleSheet.create({
 	},
 	textBahasaTitik : {
 		fontWeight: 'bold', 
-		fontSize: 20, 
+		fontSize: 20,
 		position: 'absolute',
 	},
 	morePressed: {
