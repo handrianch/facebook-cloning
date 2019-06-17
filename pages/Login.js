@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, Image, StyleSheet, TextInput, Button, ScrollView, StatusBar, TouchableWithoutFeedback, Modal, BackHandler } from 'react-native';
+import { View, Text, Image, StyleSheet, TextInput, Button, ScrollView, StatusBar, TouchableWithoutFeedback, Modal } from 'react-native';
 import Head1 from '../component/login/Head1';
 import Head2 from '../component/login/Head2';
 import stylesHead1 from '../style/login/styleHead1';
@@ -94,6 +94,20 @@ class Login extends Component {
 	render() {
 		return (
 			<View style={[{backgroundColor: '#fff'}, stylesMain.container]}>
+				<Modal animation="fade" transparent={true} visible={false}>
+					<View style={{ flex: 1, backgroundColor: '#00000099' }}>
+						<View style={{ flex: 1, backgroundColor: '#fff', marginHorizontal: 30, marginTop: 50, marginBottom: 30, borderRadius: 5 }}>
+							<View style={{ flex: 1 }}></View>
+							<View style={{ height: 70, borderTopWidth: 1, borderTopColor: '#ebebeb',  borderBottomLeftRadius: 5, borderBottomRightRadius: 5, alignItems: 'flex-end', paddingRight: 20, paddingVertical: 8 }}>
+								<TouchableWithoutFeedback>
+									<View style={{ width: '40%', backgroundColor: '#ebebeb', flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+										<Text style={{ color: '#000', fontSize: 15}}>Cancel</Text>
+									</View>
+								</TouchableWithoutFeedback>
+							</View>
+						</View>
+					</View>
+				</Modal>
 				{/* Bagian Body */}
 				{ this.renderHead() }
 				<View style={stylesBody.body}>
