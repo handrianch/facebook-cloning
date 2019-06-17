@@ -80,7 +80,9 @@ class Market extends Component {
 							</View>
 						</ScrollView>
 						</View>
-					<View></View>
+					<View>
+						
+					</View>
 				</View>
 			</ScrollView>
 			
