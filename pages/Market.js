@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {View, Text, ScrollView, Image, TextInput, StatusBar} from 'react-native';
+import Category from '../component/market/Category';
 
 class Market extends Component {
 	render() {
@@ -81,7 +82,7 @@ class Market extends Component {
 						</ScrollView>
 						</View>
 					<View>
-						
+						<Category category="Today's Picks" location="Tangerang Selatan" image={[1, 2, 3]} style={{ marginBottom: 20}} />
 					</View>
 				</View>
 			</ScrollView>

@@ -1,24 +1,29 @@
 import React, { Component } from 'react';
-import { View, Image, Text } from 'react-native';
+import { View, Text } from 'react-native';
+import Photo from './Photo';
 
 class GridPhoto extends Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			collection: [],
+		}
+	}
+
+	renderPhoto = () => {
+		return this.props.image.map(data => {
+			return (<Photo />)
+		})
+	}
+
 	render() {
 		return (
-			<View style={{ flex: 1 }}>
-				{/* wrapper text */}
-				<View style={{ flex: 1 }}>
-					<View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-						<View style={{ flex: 1, justifyContent: 'center', paddingLeft: 8 }}>
-							<Text style={{ fontWeight: 'bold', fontSize: 18 }}>Today's Picks</Text>
-						</View>
-						<View style={{ flex: 1, height: 30, justifyContent: 'center', alignItems: 'flex-end', paddingRight: 8 }}>
-							<Text style={{ color: '#1877f2', fontSize: 16 }}>Tangerang Selatan</Text>
-						</View>
-					</View>
-				</View>
+			<View style={[{ flex: 1, flexDirection: 'row', justifyContent: 'space-between', marginTop: 6 }]}>
+				
+				
 			</View>
 		);
 	}
 }
 
-export default GridPhoto;
+export default Photo;
