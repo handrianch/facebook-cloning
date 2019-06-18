@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { View, Text, Image, StyleSheet, TextInput, Button, ScrollView, StatusBar, TouchableWithoutFeedback, Modal } from 'react-native';
-import Head1 from '../component/login/Head1';
-import Head2 from '../component/login/Head2';
-import stylesHead1 from '../style/login/styleHead1';
-import stylesBody from '../style/login/styleBody';
+import { Navigation } from 'react-native-navigation';
+import Head1 from './../component/login/Head1';
+import Head2 from './../component/login/Head2';
+import stylesHead1 from './../style/login/styleHead1';
+import stylesBody from './../style/login/styleBody';
 
 class Login extends Component {
 	constructor() {
@@ -51,6 +52,14 @@ class Login extends Component {
 
 	btnRegisUnPressed = () => {
 		this.setState({btnRegister : !this.state.btnRegister})
+	}
+
+	goToMarket() {
+		Navigation.push(this.props.componentId, {
+			component: {
+				name: 'fb.market'
+			}
+		});
 	}
 
 	renderPartials = () => {
@@ -127,7 +136,7 @@ class Login extends Component {
 							</View>
 
 							<View style={stylesBody.wrapperBtnLogin}>
-								<Button title="Login" color="#3B5998" />
+								<Button title="Login" color="#3B5998" onPress={() => this.goToMarket()}/>
 							</View>
 
 							{this.renderPartials()}

@@ -1,13 +1,22 @@
-/**
- * @format
- */
+import { Navigation } from 'react-native-navigation';
+import Login from './src/screens/Login';
+import Market from './src/screens/Market';
+import ScreenRegister from './src/screens/Screen';
 
-import {AppRegistry} from 'react-native';
-import App from './App';
-import Login from './pages/Login';
-import Market from './pages/Market';
-import Category from './component/market/Category';
-import {name as appName} from './app.json';
+ScreenRegister();
 
-AppRegistry.registerComponent(appName, () => Market);
-// AppRegistry.registerComponent(appName, () => Login);
+Navigation.events().registerAppLaunchedListener(() => {
+  Navigation.setRoot({
+    root: {
+      stack: {
+      	children : [
+      		{
+      			component: {
+      				name: 'fb.login'
+      			}
+      		}
+      	]
+      }
+    }
+  });
+});
