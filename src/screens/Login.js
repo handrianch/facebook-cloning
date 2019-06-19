@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { View, Text, Image, StyleSheet, TextInput, Button, ScrollView, StatusBar, TouchableWithoutFeedback, Modal } from 'react-native';
+import { View, Text, StyleSheet, TextInput, Button, TouchableWithoutFeedback, Modal } from 'react-native';
+import StatusBar from '../component/base/StatusBar';
 import { Navigation } from 'react-native-navigation';
 import Head1 from './../component/login/Head1';
 import Head2 from './../component/login/Head2';
@@ -47,7 +48,6 @@ class Login extends Component {
 
 	btnRegisPressed = () => {
 		this.setState({btnRegister : !this.state.btnRegister})
-		// this.setState({btnRegister : !this.state.btnRegister})
 	}
 
 	btnRegisUnPressed = () => {
@@ -57,7 +57,7 @@ class Login extends Component {
 	goToMarket() {
 		Navigation.push(this.props.componentId, {
 			component: {
-				name: 'fb.market'
+				name: 'fb.home'
 			}
 		});
 	}
@@ -103,6 +103,7 @@ class Login extends Component {
 	render() {
 		return (
 			<View style={[{backgroundColor: '#fff'}, stylesMain.container]}>
+				<StatusBar color="#2d4778" />
 				<Modal animation="fade" transparent={true} visible={false}>
 					<View style={{ flex: 1, backgroundColor: '#00000099' }}>
 						<View style={{ flex: 1, backgroundColor: '#fff', marginHorizontal: 30, marginTop: 50, marginBottom: 30, borderRadius: 5 }}>

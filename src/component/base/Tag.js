@@ -1,0 +1,29 @@
+import React, { Component } from 'react';
+import { View, ScrollView, Image, Text } from 'react-native';
+import TagItem from '../small/TagItem';
+
+class Tag extends Component {
+	render() {
+		return (
+			<View style={{ height: 70, borderBottomWidth: 2, borderBottomColor: '#e3e3e3', flex: 1 }}>
+				<ScrollView horizontal={true} showsHorizontalScrollIndicator={false} alwaysBounceHorizontal={true}>
+					<View style={{ flex: 1, flexDirection: 'row'}}>
+						<View style={{ flex: 1, justifyContent: 'center' , alignItems: 'center', marginHorizontal: 6, marginLeft: 20}}>
+							<View style={{ backgroundColor: '#e3e3e3', borderRadius: 50, padding: 7 }}>
+								<Image source={require('../../assets/icon/user.png')} style={{ width: 20, height: 20 }} />
+							</View>
+						</View>
+
+						<TagItem text="Sell" />
+						<TagItem text="Vechiles" />
+						<TagItem text="Local" />
+						<TagItem text="Rentals" />
+						<TagItem text="More" />
+					</View>
+				</ScrollView>
+			</View>
+		);
+	}
+}
+
+export default Tag;

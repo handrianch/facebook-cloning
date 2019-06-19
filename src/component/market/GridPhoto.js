@@ -18,12 +18,14 @@ class GridPhoto extends Component {
 
 	render() {
 		return (
-			<View style={[{ flex: 1, flexDirection: 'row', justifyContent: 'space-between', marginTop: 6 }]}>
-				
-				
+			<View>
+				<View style={[{ flex: 1, flexDirection: 'row', justifyContent: 'space-between', marginTop: 6 }]}>
+					<Photo />
+					<Photo />
+				</View>
 			</View>
 		);
 	}
 }
 
-export default Photo;
+export default GridPhoto;

@@ -1,0 +1,32 @@
+[
+	{
+		"image" : "../../assets/icon/credit-card.png",
+		"page" : "fb.home",
+		"style" : {},
+		"name" : "home"
+	},
+	{
+		"image" : "../../assets/icon/brand.png",
+		"page" : "fb.home",
+		"style" : {},
+		"name" : "profile"
+	},
+	{
+		"image" : "../../assets/icon/store.png",
+		"page" : "fb.home",
+		"style" : {"width": "40%", "height": "50%"},
+		"name" : "store"
+	},
+	{
+		"image" : "../../assets/icon/notification.png",
+		"page" : "fb.home",
+		"style" : {"width": "40%", "height": "50%"},
+		"name" : "notification"
+	},
+	{
+		"image" : "../../assets/icon/menu.png",
+		"page" : "fb.home",
+		"style" : {},
+		"name" : "more"
+	}
+]
