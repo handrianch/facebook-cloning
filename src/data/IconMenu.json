@@ -1,32 +1,26 @@
 [
 	{
-		"image" : "../../assets/icon/credit-card.png",
-		"page" : "fb.home",
-		"style" : {},
-		"name" : "home"
+		"image" : "account-card-details-outline",
+		"page" : "fb.home"
 	},
 	{
-		"image" : "../../assets/icon/brand.png",
-		"page" : "fb.home",
-		"style" : {},
-		"name" : "profile"
+		"image" : "account-supervisor",
+		"page" : "fb.home"
 	},
 	{
-		"image" : "../../assets/icon/store.png",
-		"page" : "fb.home",
-		"style" : {"width": "40%", "height": "50%"},
-		"name" : "store"
+		"image" : "account-group",
+		"page" : "fb.home"
 	},
 	{
-		"image" : "../../assets/icon/notification.png",
-		"page" : "fb.home",
-		"style" : {"width": "40%", "height": "50%"},
-		"name" : "notification"
+		"image" : "account-circle-outline",
+		"page" : "fb.home"
+	},	
+	{
+		"image" : "bell-circle-outline",
+		"page" : "fb.home"
 	},
 	{
-		"image" : "../../assets/icon/menu.png",
-		"page" : "fb.home",
-		"style" : {},
-		"name" : "more"
+		"image" : "reorder-horizontal",
+		"page" : "fb.home"
 	}
 ]

@@ -3,6 +3,10 @@ import { View, ScrollView, Image, Text } from 'react-native';
 import TagItem from '../small/TagItem';
 
 class Tag extends Component {
+	tagItem = [
+		"Sell", "Vechiles", "Local", "Rentals", "More"
+	];
+	
 	render() {
 		return (
 			<View style={{ height: 70, borderBottomWidth: 2, borderBottomColor: '#e3e3e3', flex: 1 }}>
@@ -14,11 +18,10 @@ class Tag extends Component {
 							</View>
 						</View>
 
-						<TagItem text="Sell" />
-						<TagItem text="Vechiles" />
-						<TagItem text="Local" />
-						<TagItem text="Rentals" />
-						<TagItem text="More" />
+						{
+							this.tagItem.map(item => (<TagItem text={item} />))
+						}
+						
 					</View>
 				</ScrollView>
 			</View>

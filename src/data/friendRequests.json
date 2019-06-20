@@ -1,0 +1,37 @@
+[
+	{
+		"id": "1",
+		"name" : "luffy",
+		"image" : "../assets/images/anjay.jpg",
+		"mutualFriends": 2,
+		"addFrom": "3y" 
+	},
+	{
+		"id": "2",
+		"name" : "zorro",
+		"image" : "../assets/images/anjay.jpg",
+		"mutualFriends": 2,
+		"addFrom": "15w" 
+	},
+	{
+		"id": "3",
+		"name" : "sanji",
+		"image" : "../assets/images/anjay.jpg",
+		"mutualFriends": 2,
+		"addFrom": "1d" 
+	},
+	{
+		"id": "4",
+		"name" : "usop",
+		"image" : "../assets/images/anjay.jpg",
+		"mutualFriends": 2,
+		"addFrom": "3y" 
+	},
+	{
+		"id": "5",
+		"name" : "usop",
+		"image" : "../assets/images/anjay.jpg",
+		"mutualFriends": 2,
+		"addFrom": "3y" 
+	}
+]

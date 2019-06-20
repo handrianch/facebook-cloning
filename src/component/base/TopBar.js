@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
-import { View } from 'react-native';
+import { View, ScrollView } from 'react-native';
 import NavHeader from './NavHeader';
 import ActionBar from './ActionBar';
 
 class TopBar extends Component {
 	render() {
 		return (
-			<View>
-				<NavHeader />
-				<ActionBar />
-			</View>
+				<View>
+					<NavHeader />
+					<ActionBar />
+				</View>
 		)
 	}
 }

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { View, Image, TouchableWithoutFeedback, StyleSheet, Text } from 'react-native';
+import { View, Image, TouchableWithoutFeedback, StyleSheet, Text, ScrollView } from 'react-native';
+import Navigation from 'react-native-navigation';
 import ActionMenu from '../small/ActionMenu';
 import data from '../../data/IconMenu.json';
 
@@ -30,15 +31,17 @@ class ActionBar extends Component {
 
 	render() {
 		return (
-			<View style={styles.wrapperActionMenu}>
-				{
-					data.map((item, index) => {
-						return (
-							<ActionMenu key={index} image={item.name} style={item.style}/>
-						)
-					})
-				}
-			</View>
+			// <ScrollView stickyHeaderIndices={[1]}>
+				<View style={styles.wrapperActionMenu}>
+					{
+						data.map((item, index) => {
+							return (
+								<ActionMenu key={index} image={item.image} onPressIcon={() => this.movePage('market')}/>
+							)
+						})
+					}
+				</View>
+			// </ScrollView>
 		);
 	}
 }
@@ -47,7 +50,7 @@ export default ActionBar;
 
 const styles = StyleSheet.create({
 	wrapperActionMenu: { 
-		height: 55, 
+		height: 60, 
 		backgroundColor: '#ffffff',
 		flexDirection: 'row'
 	}

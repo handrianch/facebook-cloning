@@ -1,21 +1,29 @@
 import React, { Component } from 'react';
 import {Navigation} from 'react-native-navigation';
-import { View, Image, StyleSheet } from 'react-native';
+import { View, Image, StyleSheet, TouchableWithoutFeedback } from 'react-native';
+import { Icon } from 'react-native-elements';
 
 class ActionMenu extends Component {
-	iconName = {
-		home: require('../../assets/icon/credit-card.png'),
-		profile: require('../../assets/icon/brand.png'),
-		store: require('../../assets/icon/store.png'),
-		notification: require('../../assets/icon/notification.png'),
-		more: require('../../assets/icon/menu.png'),
+	constructor() {
+		super();
+		this.state = {
+			menuPressed: false,
+		}
+	}
+
+	boxPressed = () => {
+		this.setState({menuPressed: !this.state.menuPressed});
 	}
 
 	render() {
 		return (
-			<View style={[styles.wrapperIcon, this.props.showOverlay ? styles.wrapperIconPressIn : styles.wrapperIconPressOut]}>
-				<Image style={[styles.icon, this.props.style]} source={this.iconName[this.props.image]} />
-			</View>
+			<TouchableWithoutFeedback onPressIn={this.boxPressed} onPressOut={this.boxPressed}>
+				<View style={[styles.wrapperIcon, this.state.menuPressed ? styles.menuPressedIn : {}]}>
+					<Icon size={25} 
+					color={this.state.iconActive ? "#1777f0" : this.state.menuPressed ? "blue" : "#6f6f6f"} 
+					name={this.props.image} type='material-community'/>
+				</View>
+			</TouchableWithoutFeedback>
 		)
 	}
 }
@@ -27,15 +35,17 @@ const styles = StyleSheet.create({
 		flex: 1, 
 		justifyContent: 'center',
 		alignItems: 'center',
-	},
-	wrapperIconPressIn: {
-		backgroundColor: '#ebebeb'
-	},
-	wrapperIconPressOut: {
-		backgroundColor: '#ffffff'
+		padding: 5,
 	},
 	icon : {
 		width: '40%', 
-		height: '40%'
+		height: '40%',
+		backgroundColor: '#000000'
+	},
+	menuPressedIn: {
+		backgroundColor: '#ebebeb'
+	},
+	menuPressedIn: {
+		backgroundColor: '#fff'
 	}
 })
