@@ -19,34 +19,33 @@ class Home extends Component {
 
 	render() {
 		return (
-			<ScrollView style={{ backgroundColor: '#dadee1' }}>
-				<StatusBar />
 				<View style={{flex: 1, backgroundColor: '#dadee1'}}>
-					<TopBar componentId={this.props.componentId} pageActive="home" />
+					<TopBar componentId={this.props.componentId}/>
 
-					<View style={{ flex: 1, backgroundColor: '#fff', marginTop: 2, flexDirection: 'row', height: 70, padding: 15}}>
-						<ThumbnailPhoto style={{ width: 40 }} />
-						<View style={{ flex: 1, padding: 2, marginLeft: 7}}>
-							<TextInput placeholder="What's on your mind?" style={{ paddingLeft: 20, paddingTop: 12, paddingRight: 40, borderWidth: 1, borderRadius: 20, borderColor: '#ebebeb'}} />
+					<ScrollView>
+						<View style={{ flex: 1, backgroundColor: '#fff', marginTop: 2, flexDirection: 'row', height: 70, padding: 15}}>
+							<ThumbnailPhoto image="https://randomuser.me/api/portraits/men/5.jpg" style={{ width: 40 }} />
+							<View style={{ flex: 1, padding: 2, marginLeft: 7}}>
+								<TextInput placeholder="What's on your mind?" style={{ paddingLeft: 20, paddingTop: 12, paddingRight: 40, borderWidth: 1, borderRadius: 20, borderColor: '#ebebeb'}} />
+							</View>
+							<View style={{ width: 40, justifyContent: 'center', alignItems: 'center', marginTop: 3}}>
+								<Image source={require("../assets/icon/attach.png")} style={{ width: '52%', height: '55%', marginBottom: 2 }} />
+							</View>
 						</View>
-						<View style={{ width: 40, justifyContent: 'center', alignItems: 'center', marginTop: 3}}>
-							<Image source={require("../assets/icon/attach.png")} style={{ width: '52%', height: '55%', marginBottom: 2 }} />
+
+						<View style={{ flex: 1, flexDirection: 'row', backgroundColor: '#fff', marginVertical: 15, height: 220}}>
+							<ScrollView horizontal={true} showsHorizontalScrollIndicator={false} style={{ padding: 15 }}>
+								{ dataStory.map(item => <Story data={item} />) }
+							</ScrollView>
 						</View>
-					</View>
 
-					<View style={{ flex: 1, flexDirection: 'row', backgroundColor: '#fff', marginVertical: 15, height: 220}}>
-						<ScrollView horizontal={true} showsHorizontalScrollIndicator={false} style={{ padding: 20 }}>
-							{ dataStory.map(e => <Story />) }
-						</ScrollView>
-					</View>
-
-					<FlatList 
-						data={status}
-						renderItem={( {item} ) => <Post data={item}/> }
-						keyExtractor={(item) => item.id}
-					/>
+						<FlatList 
+							data={status}
+							renderItem={( {item} ) => <Post data={item}/> }
+							keyExtractor={(item) => item.id}
+						/>
+					</ScrollView>
 				</View>
-			</ScrollView>
 		);
 	}
 }

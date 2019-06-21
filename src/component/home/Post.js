@@ -9,11 +9,11 @@ class Post extends Component {
 		this.state = {
 			likeButton: false,
 			commentButton: false,
+			topPart: false,
+			bottomPart: false,
+			btnMore: false
 		}
 	}
-
-	likePressed = () => this.setState({likeButton: !this.state.likeButton});
-	commentPressed = () => this.setState({commentButton: !this.state.commentButton});
 
 	img = {
 		'saitama'	: require('../../assets/images/526887.jpg'),
@@ -21,27 +21,37 @@ class Post extends Component {
 		'fang'		: require('../../assets/images/minion.jpg'),
 		'king'		: require('../../assets/images/op.jpg'),
 	}
+	
+	topPartPressed 		= () => this.setState({topPart: !this.state.topPart});
+	bottomPartPressed 	= () => this.setState({bottomPart: !this.state.bottomPart});
+	likePressed 		= () => this.setState({likeButton: !this.state.likeButton});
+	commentPressed 		= () => this.setState({commentButton: !this.state.commentButton});
+	btnMorePressed 		= () => this.setState({btnMore: !this.state.btnMore});
 
 	render() {
 		return(
 			<View style={styles.container}>
-				<View style={styles.wrapperTopPart}>
-					<ThumbnailPhoto style={styles.wrapperPhotoProfile} />
-					
-					<View style={styles.wrapperProfileName}>
-						<Text style={styles.profileName}>{this.props.data.name}</Text>
-						<Text style={styles.timePost}>{this.props.data.minute}</Text>
+				<TouchableWithoutFeedback onPressIn={this.topPartPressed} onPressOut={this.topPartPressed}>
+					<View style={[styles.wrapperTopPart, this.state.topPart ? {backgroundColor: '#ebebeb'} : {}]}>
+						<ThumbnailPhoto image={this.props.data.image} style={styles.wrapperPhotoProfile} />
+						
+						<View style={styles.wrapperProfileName}>
+							<Text style={styles.profileName}>{this.props.data.name}</Text>
+							<Text style={styles.timePost}>{this.props.data.minute}</Text>
+						</View>
+						<TouchableWithoutFeedback onPressIn={this.btnMorePressed} onPressOut={this.btnMorePressed}>
+							<View style={[styles.btnMore, this.state.btnMore ? {backgroundColor: '#ebebeb'} : {}]}>
+								<Icon size={20} name='dots-horizontal' type='material-community'/>
+							</View>
+						</TouchableWithoutFeedback>
 					</View>
-					
-					<View style={styles.btnMore}>
-						<Icon size={20} name='dots-horizontal' type='material-community'/>
-					</View>
-				</View>
+				</TouchableWithoutFeedback>
 
 				<View style={styles.wrapperMiddlePart}>
 					<View style={styles.wrapperPost}>
 						<Text style={styles.postText}>{this.props.data.text}</Text>
-						<View style={styles.wrapperInfoPart}>
+						<TouchableWithoutFeedback onPressIn={this.bottomPartPressed} onPressOut={this.bottomPartPressed}>
+							<View style={[styles.wrapperInfoPart, this.state.bottomPart ? {backgroundColor: '#ebebeb'} : {}]}>
 							<View style={[styles.InfoPart, {flexDirection: 'row'}]}>
 								{
 									this.props.data.like && this.props.data.like != 0 ?
@@ -69,7 +79,8 @@ class Post extends Component {
 								<Text style={styles.comment}>
 								{this.props.data.comments} {this.props.data.comments > 1 ? "Comments" : "Comment" }</Text>
 							</View>
-						</View>
+							</View>
+						</TouchableWithoutFeedback>
 					</View>
 				</View>
 
@@ -103,17 +114,15 @@ const styles = StyleSheet.create({
 	wrapperProfileName: { flex: 1, height: 50, marginTop: 5 },
 	profileName: { fontSize: 20, color: '#000', fontWeight: 'bold' },
 	timePost: { fontSize: 10, marginTop: -2 },
-	btnMore: { justifyContent: 'center', alignItems: 'center', width: 40,  height: 50, padding: 5},
+	btnMore: { justifyContent: 'center', alignItems: 'center', width: 40,  height: 50, padding: 5, height: 39, borderRadius: 100},
 	wrapperMiddlePart: { 
-		paddingHorizontal: 10, 
-		paddingBottom: 8, 
 		borderBottomWidth: 2, 
 		borderBottomColor: '#ebebeb', 
 		alignItems: 'flex-start'
 	},
 	wrapperPost: { flex: 1 },
-	postText: { fontSize: 15, color: '#000', marginBottom: 15 },
-	wrapperInfoPart: { flex: 1, flexDirection: 'row', justifyContent: 'space-between' },
+	postText: { fontSize: 15, color: '#000', marginBottom: 5, paddingHorizontal: 10, paddingBottom: 8  },
+	wrapperInfoPart: { flex: 1, flexDirection: 'row', justifyContent: 'space-between', padding: 8 },
 	infoPart: { flex: 1, flexDirection: 'row' },
 	wrapperIcon: { 
 		backgroundColor: '#2196f3', 

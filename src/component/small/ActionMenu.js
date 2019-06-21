@@ -46,7 +46,7 @@ class ActionMenu extends Component {
 	movePage = () => {
 		Navigation.push(this.props.componentId, {
 		  component: {
-		    name: this.props.page
+		    name: this.props.data.page
 		  }
 		});
 	}
@@ -55,7 +55,8 @@ class ActionMenu extends Component {
 		return (
 			<TouchableWithoutFeedback onPressIn={this.boxPressed} onPressOut={this.boxPressed}>
 				<View style={[styles.wrapperIcon, this.state.menuPressed ? {backgroundColor: '#ebebeb'} : {}]}>
-					<Image source={this.icon.home.active} style={{ width: '80%', height: '80%'}} />
+					<Image source={this.state.menuPressed ? this.props.data.active : this.props.data.unactive}
+					style={this.state.menuPressed ? { width: '70%', height: '70%'} : { width: '80%', height: '80%'}} />
 				</View>
 			</TouchableWithoutFeedback>
 		)

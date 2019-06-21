@@ -23,7 +23,7 @@ class Photo extends Component {
 
 	render() {
 		return (
-			 <View key={this.props.key ? this.props.key : 0} style={{ width: '50%', marginRight: 6 }}>
+			 <View key={this.props.key ? this.props.key : 0} style={{ flex: 1, marginRight: 6 }}>
 				<View style={{ width: '100%', height: 170, backgroundColor: '#000000', position: 'relative'}}>
 					<Image style={{ width: '100%', height: 170 }} source={require('../../assets/images/anjay.jpg')} onPress={this.goToDetailPhoto}/>
 				</View>

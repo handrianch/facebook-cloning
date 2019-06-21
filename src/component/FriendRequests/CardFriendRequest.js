@@ -1,19 +1,29 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Button } from 'react-native';
+import { View, Text, StyleSheet, Button, TouchableWithoutFeedback } from 'react-native';
 import ThumbnailPhoto from '../small/ThumbnailPhoto';
 import CustomButton from '../small/CustomButton';
 
 class CardFriendRequest extends Component {
+	constructor() {
+		super();
+		this.state = {
+			cardPressed: false,
+		}
+	}
+
+	pressed = () => this.setState({cardPressed: !this.state.cardPressed})
+	
 	render() {
 		return (
-			<View style={styles.wrapper}>
+			<TouchableWithoutFeedback onPressIn={this.pressed} onPressOut={this.pressed}>
+				<View style={[styles.wrapper, this.state.cardPressed ? styles.wrapperPresed : {}]}>
 				<View style={styles.wrapperImage}>
-					<ThumbnailPhoto style={styles.photoProfile} />
+					<ThumbnailPhoto image={this.props.data.image} style={styles.photoProfile} />
 				</View>
 				<View style={styles.wrapperInfo}>
 					<View style={styles.wrapperText}>
 						<Text style={styles.textName}>
-							{this.props.data.name.slice(0, 1).toUpperCase() + this.props.data.name.slice(1)}
+							{this.props.data.name}
 						</Text>
 						<Text style={styles.addFrom}>{this.props.data.addFrom}</Text>
 					</View>
@@ -36,7 +46,8 @@ class CardFriendRequest extends Component {
 							title="Delete" />
 					</View>
 				</View>
-			</View>
+				</View>
+			</TouchableWithoutFeedback>
 		);
 	}
 }
@@ -45,9 +56,10 @@ export default CardFriendRequest;
 
 const styles = StyleSheet.create({
 	wrapper: {flex: 1, flexDirection: 'row', backgroundColor: '#fff', padding: 10},
+	wrapperPresed: {backgroundColor: '#ebebeb'},
 	wrapperInfo: {flex: 1},
 	wrapperText: { flexDirection: 'row' },
-	textName: {flex: 1, fontSize: 24, color: '#000'},
+	textName: {flex: 1, fontSize: 24, color: '#000', textTransform: 'capitalize'},
 	textMutualFriend: {fontSize: 14},
 	photoProfile: { width: 100, height: 100},
 	wrapperImage: {marginRight: 8},

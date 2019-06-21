@@ -6,52 +6,46 @@ import data from '../../data/IconMenu.json';
 
 class ActionBar extends Component {
 	
-	icon = {
-		home: {
+	icon = [
+		{
 			active: require('../../assets/icons/home-active.png'),
 			unactive: require('../../assets/icons/home.png'),
 			page: 'fb.home'
 		},
-		friendRequest: {
+		{
 			active: require('../../assets/icons/friend-requests-active.png'),
 			unactive: require('../../assets/icons/friend-requests.png'),
 			page: 'fb.friendRequest'
 		},
-		group: {
+		{
 			active: require('../../assets/icons/group-active.png'),
 			unactive: require('../../assets/icons/group.png'),
 			page: 'fb.home'
 		},
-		profile: {
+		{
 			active: require('../../assets/icons/profile-active.png'),
 			unactive: require('../../assets/icons/profile.png'),
 			page: 'fb.home'
 		},
-		notification: {
+		{
 			active: require('../../assets/icons/notification-active.png'),
 			unactive: require('../../assets/icons/notification.png'),
-			page: 'fb.notifikasi'
+			page: 'fb.notification'
 		},
-		more: {
+		{
 			active: require('../../assets/icons/more-active.png'),
 			unactive: require('../../assets/icons/more.png'),
 			page: 'fb.more'
 		}
-	}
+	]
 
 	render() {
 		return (
 			<View style={styles.wrapperActionMenu}>
 				{
-					data.map((item, index) => {
+					this.icon.map(item => {
 						return (
-							<ActionMenu 
-								componentId={this.props.componentId} 
-								key={index} 
-								page={item.page} 
-								image={item.image}
-								pageActive={this.props.pageActive}
-							/>
+							<ActionMenu componentId={this.props.componentId} data={item} />
 						)
 					})
 				}

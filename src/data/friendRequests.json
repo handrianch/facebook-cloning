@@ -2,35 +2,35 @@
 	{
 		"id": "1",
 		"name" : "luffy",
-		"image" : "../assets/images/anjay.jpg",
+		"image" : "https://randomuser.me/api/portraits/men/17.jpg",
 		"mutualFriends": 2,
 		"addFrom": "3y" 
 	},
 	{
 		"id": "2",
 		"name" : "zorro",
-		"image" : "../assets/images/anjay.jpg",
+		"image" : "https://randomuser.me/api/portraits/men/11.jpg",
 		"mutualFriends": 2,
 		"addFrom": "15w" 
 	},
 	{
 		"id": "3",
 		"name" : "sanji",
-		"image" : "../assets/images/anjay.jpg",
+		"image" : "https://randomuser.me/api/portraits/men/8.jpg",
 		"mutualFriends": 2,
 		"addFrom": "1d" 
 	},
 	{
 		"id": "4",
 		"name" : "usop",
-		"image" : "../assets/images/anjay.jpg",
+		"image" : "https://randomuser.me/api/portraits/men/2.jpg",
 		"mutualFriends": 2,
 		"addFrom": "3y" 
 	},
 	{
 		"id": "5",
 		"name" : "usop",
-		"image" : "../assets/images/anjay.jpg",
+		"image" : "https://randomuser.me/api/portraits/men/30.jpg",
 		"mutualFriends": 2,
 		"addFrom": "3y" 
 	}

@@ -2,6 +2,7 @@
 	{
 		"id" : "2001",
 		"name" : "Saitama",
+		"image": "https://randomuser.me/api/portraits/men/5.jpg",
 		"text" : "Lorem ipsum dolor sit amet, consectetur adipisicing elit. In, minima sint deleniti aspernatur, rerum facilis doloremque doloribus non, aperiam quo maiores nam quis magni dolore nulla. Quo reiciendis quam repellendus.",
 		"minute" : "10 minute ago",
 		"like" : "",
@@ -11,6 +12,7 @@
 	{
 		"id" : "2002",
 		"name" : "Sonic",
+		"image": "https://randomuser.me/api/portraits/women/10.jpg",
 		"text" : "Lorem ipsum dolor sit amet, consectetur adipisicing elit. In, minima sint deleniti aspernatur, rerum facilis doloremque doloribus non, aperiam quo maiores nam quis magni dolore nulla. Quo reiciendis quam repellendus.",
 		"minute" : "45 minute ago",
 		"like" : "19",
@@ -20,6 +22,7 @@
 	{
 		"id" : "2003",
 		"name" : "King",
+		"image" : "https://randomuser.me/api/portraits/women/15.jpg",
 		"text" : "Lorem ipsum dolor sit amet, consectetur adipisicing elit. In, minima sint deleniti aspernatur, rerum facilis doloremque doloribus non, aperiam quo maiores nam quis magni dolore nulla. Quo reiciendis quam repellendus.",
 		"minute" : "10 minute ago",
 		"like" : "999.999",
@@ -29,6 +32,7 @@
 	{
 		"id" : "2004",
 		"name" : "fang",
+		"image": "https://randomuser.me/api/portraits/men/15.jpg",
 		"text" : "Lorem ipsum dolor sit amet, consectetur adipisicing elit. In, minima sint deleniti aspernatur, rerum facilis doloremque doloribus non, aperiam quo maiores nam quis magni dolore nulla. Quo reiciendis quam repellendus.",
 		"minute" : "10 minute ago",
 		"like" : "1",

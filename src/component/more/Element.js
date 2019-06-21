@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, StyleSheet, Text, Image, TouchableWithoutFeedback } from 'react-native';
+import { Navigation } from 'react-native-navigation';
 
 class Element extends React.PureComponent {
 	constructor(props) {
@@ -9,9 +10,20 @@ class Element extends React.PureComponent {
 		}
 	}
 
+	movePage = () => {
+		Navigation.push(this.props.componentId, {
+			component: {
+				name: 'fb.market'
+			}
+		});
+	}
+
 	toCapitalize = text => text.slice(0, 1).toUpperCase() + text.slice(1)
 
-	backgroundPresed = () => this.setState({wrapperPressed: !this.state.wrapperPressed});
+	backgroundPresed = () => {
+		this.setState({wrapperPressed: !this.state.wrapperPressed})
+		this.movePage();
+	}
 
 	render() {
 		return (

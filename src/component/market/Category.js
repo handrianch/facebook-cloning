@@ -11,7 +11,7 @@ class Category extends Component {
 			<View style={[{ flex: 1}, this.props.style]}>
 				<Title title={this.props.title} location={this.props.location} />
 
-				<View>
+				<View style={{ flexWrap: 'wrap' }}>
 					<GridPhoto image={this.props.image} />
 				</View>
 			</View>

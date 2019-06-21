@@ -15,9 +15,9 @@ class CustomButton extends React.PureComponent {
 
 	render() {
 		return (
-			<TouchableWithoutFeedback onPressIn={this.btnPress} OnPressOut={this.btnPress}>
-				<View style={[this.state.btnPressed ? {padding: 3} : {padding: 0}, styles.wrapperButton, this.props.styleWrapper]}>
-					<View style={[styles.button, this.props.styleButton]}>
+			<TouchableWithoutFeedback onPressIn={this.btnPress} onPressOut={this.btnPress}>
+				<View style={[styles.wrapperButton, this.props.styleWrapper, {}]}>
+					<View style={[styles.button, this.props.styleButton, this.state.btnPressed ? {width: '90%', height: '90%'} : {}]}>
 						<Text style={[styles.textButton, this.props.styleTextButton, {fontSize: 13}]}>
 							{this.props.title}
 						</Text>
@@ -31,13 +31,15 @@ class CustomButton extends React.PureComponent {
 export default CustomButton;
 
 const styles = StyleSheet.create({
-	wrapperButton: { flex: 1, marginRight: 3 },
+	wrapperButton: { flex: 1, marginRight: 3, height: '100%', height: '100%', justifyContent: 'center', alignItems: 'center'},
 	button : { 
 		width: '100%', 
 		height: '100%', 
 		borderRadius: 5, 
 		alignItems: 'center', 
-		justifyContent: 'center'
+		justifyContent: 'center',
+		alignItems: 'center',
+		backgroundColor: '#000000'
 	},
 	textButton: { color: '#fff', fontWeight: 'bold' }
 })

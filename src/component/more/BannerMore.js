@@ -18,7 +18,7 @@ class BannerMore extends Component {
 				<View style={[this.state.wrapperPressed ? styles.wrapperPressed : {}, styles.wrapper]}>
 					<View style={styles.banner}>
 						<View style={styles.wrapperImage}>
-							<ThumbnailPhoto style={styles.image} />
+							<ThumbnailPhoto image="https://randomuser.me/api/portraits/men/5.jpg" style={styles.image} />
 						</View>
 						<View style={styles.wrapperText}>
 							<Text style={styles.profileName}>Candra Handrian</Text>
