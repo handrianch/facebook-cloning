@@ -11,7 +11,7 @@ class Market extends Component {
 			<ScrollView style={{ backgroundColor: '#fff' }}>
 				<StatusBar color="#2d4778" />
 				<View style={{flex: 1, backgroundColor: '#fff'}}>
-					<TopBar />
+					<TopBar componentId={this.props.componentId} />
 					<Tag />
 						
 					<Category title="Today's Picks" location="Tangerang Selatan" image={[1, 2, 3]} 

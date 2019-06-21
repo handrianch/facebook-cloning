@@ -6,9 +6,9 @@ import ActionBar from './ActionBar';
 class TopBar extends Component {
 	render() {
 		return (
-				<View>
+				<View style={{ borderBottomWidth: 1, borderBottomColor: '#ebebeb' }}>
 					<NavHeader />
-					<ActionBar />
+					<ActionBar componentId={this.props.componentId} />
 				</View>
 		)
 	}

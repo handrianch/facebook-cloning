@@ -57,7 +57,7 @@ class Login extends Component {
 	goToMarket() {
 		Navigation.push(this.props.componentId, {
 			component: {
-				name: 'fb.friendRequest'
+				name: 'fb.home'
 			}
 		});
 	}

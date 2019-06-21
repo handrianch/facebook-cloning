@@ -1,9 +1,20 @@
 import React, { Component } from 'react';
-import { View, Text, Image, StyleSheet } from 'react-native';
+import { View, Text, Image, StyleSheet, TouchableWithoutFeedback } from 'react-native';
 import { Icon } from 'react-native-elements';
 import ThumbnailPhoto from '../small/ThumbnailPhoto';
 
 class Post extends Component {
+	constructor() {
+		super();
+		this.state = {
+			likeButton: false,
+			commentButton: false,
+		}
+	}
+
+	likePressed = () => this.setState({likeButton: !this.state.likeButton});
+	commentPressed = () => this.setState({commentButton: !this.state.commentButton});
+
 	img = {
 		'saitama'	: require('../../assets/images/526887.jpg'),
 		'sonic'		: require('../../assets/images/anjay.jpg'),
@@ -63,15 +74,19 @@ class Post extends Component {
 				</View>
 
 				<View style={styles.wrapperButtonAction}>
-					<View style={styles.wrapperButtonLike}>
-						<Icon size={20} name='thumb-up-outline' type='material-community'/> 
-						<Text style={styles.textButtonLike}>Like</Text>
-					</View>
+					<TouchableWithoutFeedback onPressIn={this.likePressed} onPressOut={this.likePressed}>
+						<View style={[styles.wrapperButton, this.state.likeButton ? styles.wrapperButtonPressed : {}]}>
+							<Icon size={20} name='thumb-up-outline' type='material-community'/> 
+							<Text style={[styles.textButtonLike]}>Like</Text>
+						</View>
+					</TouchableWithoutFeedback>
 
-					<View style={styles.wrapperButtonComment}>
-						<Icon size={20} name='comment' type='material-community'/> 
-						<Text style={styles.textButtonComment}>Comment</Text>
-					</View>
+					<TouchableWithoutFeedback onPressIn={this.commentPressed} onPressOut={this.commentPressed}>
+						<View style={[styles.wrapperButton, this.state.commentButton ? styles.wrapperButtonPressed : {}]}>
+							<Icon size={20} name='comment' type='material-community'/> 
+							<Text style={styles.textButtonComment}>Comment</Text>
+						</View>
+					</TouchableWithoutFeedback>
 				</View>
 			</View>
 		);
@@ -111,9 +126,9 @@ const styles = StyleSheet.create({
 	infoText: { marginLeft: 5, paddingTop:3 },
 	wrapperComment: { flex: 1, alignItems: 'flex-end' },
 	comment: { marginTop: 5 },
-	wrapperButtonAction: { flex: 1, flexDirection: 'row', padding: 10 },
-	wrapperButtonLike: { flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'center' },
+	wrapperButtonAction: { flex: 1, flexDirection: 'row'},
+	wrapperButton: { flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', padding: 10 },
 	textButtonLike: { fontSize: 12, marginLeft: 4, marginTop: 5 },
-	wrapperButtonComment: { flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'center' },
-	textButtonComment: { fontSize: 12, marginLeft: 4 }
+	textButtonComment: { fontSize: 12, marginLeft: 4 },
+	wrapperButtonPressed: {backgroundColor: '#ebebeb'},
 })

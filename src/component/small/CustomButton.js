@@ -1,14 +1,29 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, TouchableWithoutFeedback } from 'react-native';
 
 class CustomButton extends React.PureComponent {
+	constructor() {
+		super();
+		this.state = {
+			btnPressed: false,
+		}
+	}
+
+	btnPress = () => {
+		this.setState({btnPressed: !this.state.btnPressed});
+	}
+
 	render() {
 		return (
-			<View style={[styles.wrapperButton, this.props.styleWrapper]}>
-				<View style={[styles.button, this.props.styleButton]}>
-					<Text style={[styles.textButton, this.props.styleTextButton]}>{this.props.title}</Text>
+			<TouchableWithoutFeedback onPressIn={this.btnPress} OnPressOut={this.btnPress}>
+				<View style={[this.state.btnPressed ? {padding: 3} : {padding: 0}, styles.wrapperButton, this.props.styleWrapper]}>
+					<View style={[styles.button, this.props.styleButton]}>
+						<Text style={[styles.textButton, this.props.styleTextButton, {fontSize: 13}]}>
+							{this.props.title}
+						</Text>
+					</View>
 				</View>
-			</View>
+			</TouchableWithoutFeedback>
 		)
 	}
 }

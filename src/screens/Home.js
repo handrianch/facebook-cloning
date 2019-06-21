@@ -10,12 +10,19 @@ import status from '../data/status.json';
 import ThumbnailPhoto from '../component/small/ThumbnailPhoto'
 
 class Home extends Component {
+	constructor() {
+		super();
+		this.sate = {
+			page: 'home'
+		}
+	}
+
 	render() {
 		return (
 			<ScrollView style={{ backgroundColor: '#dadee1' }}>
 				<StatusBar />
 				<View style={{flex: 1, backgroundColor: '#dadee1'}}>
-					<TopBar />
+					<TopBar componentId={this.props.componentId} pageActive="home" />
 
 					<View style={{ flex: 1, backgroundColor: '#fff', marginTop: 2, flexDirection: 'row', height: 70, padding: 15}}>
 						<ThumbnailPhoto style={{ width: 40 }} />
@@ -29,9 +36,7 @@ class Home extends Component {
 
 					<View style={{ flex: 1, flexDirection: 'row', backgroundColor: '#fff', marginVertical: 15, height: 220}}>
 						<ScrollView horizontal={true} showsHorizontalScrollIndicator={false} style={{ padding: 20 }}>
-							{
-								dataStory.map(e => <Story />)
-							}
+							{ dataStory.map(e => <Story />) }
 						</ScrollView>
 					</View>
 

@@ -15,7 +15,7 @@ class CardFriendRequest extends Component {
 						<Text style={styles.textName}>
 							{this.props.data.name.slice(0, 1).toUpperCase() + this.props.data.name.slice(1)}
 						</Text>
-						<Text style={styles.addFrom}>3y</Text>
+						<Text style={styles.addFrom}>{this.props.data.addFrom}</Text>
 					</View>
 					<View>
 						<Text style={styles.textMutualFriend}>

@@ -5,7 +5,7 @@
 	},
 	{
 		"image" : "account-supervisor",
-		"page" : "fb.home"
+		"page" : "fb.friendRequest"
 	},
 	{
 		"image" : "account-group",
@@ -17,10 +17,10 @@
 	},	
 	{
 		"image" : "bell-circle-outline",
-		"page" : "fb.home"
+		"page" : "fb.notification"
 	},
 	{
 		"image" : "reorder-horizontal",
-		"page" : "fb.home"
+		"page" : "fb.more"
 	}
 ]
