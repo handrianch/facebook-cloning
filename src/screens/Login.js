@@ -1,22 +1,44 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, TextInput, Button, TouchableWithoutFeedback, Modal } from 'react-native';
+import axios from 'axios';
 import StatusBar from '../component/base/StatusBar';
 import { Navigation } from 'react-native-navigation';
+import storageData from '../service/storageData';
 import Head1 from './../component/login/Head1';
 import Head2 from './../component/login/Head2';
 import stylesHead1 from './../style/login/styleHead1';
 import stylesBody from './../style/login/styleBody';
+import { AsyncStorage } from 'react-native';
 
 class Login extends Component {
-	constructor() {
-		super()
+	constructor(props) {
+		super(props)
+
 		this.state = {
 			morePressed: false,
 			modalVisible: false,
 			cancelBtnVisible: false,
 			changeHeader: false,
 			btnRegister: false,
+			email: '',
+			password: '',
+			loginFailed: false,
+			token: '',
 		}
+		
+		let promiseToken = storageData.getKey('id_token');
+		promiseToken.then(token => {
+	   		if(token) {
+	   			this._navigate('home')
+	   			return;
+	   		}
+	   	})
+	   .catch(err => {
+	   		console.error(err);
+	   });
+
+		email = this.state.email;
+		password = this.state.password;
 	}
 
 	changeUsernameIn = () => {
@@ -54,12 +76,35 @@ class Login extends Component {
 		this.setState({btnRegister : !this.state.btnRegister})
 	}
 
-	goToMarket() {
+	goToAuth = () => {
+		axios.post('http://192.168.0.19:3000/auth', {
+			email: this.state.email,
+			password: this.state.password
+		})
+		.then(response => {
+			this.setState({loginFailed: false})
+			storageData.saveKey("id_token", response.data.token);
+			this._navigate();
+		})
+		.catch(err => {
+			this.setState({loginFailed: true})
+		})
+	}
+
+	_navigate = () => {
 		Navigation.push(this.props.componentId, {
 			component: {
 				name: 'fb.home'
 			}
 		});
+	}
+
+	handleEmail = (text) => {
+		this.setState({email: text})
+	}
+
+	handlePassword = (text) => {
+		this.setState({password: text})
 	}
 
 	renderPartials = () => {
@@ -124,20 +169,25 @@ class Login extends Component {
 					{/* wrapper main konten*/}
 					<View style={stylesBody.wrapperKonten}>
 						<View>
+							{this.state.loginFailed ? <Text>Login Failed</Text> : <Text></Text> }
 							<View>
 								<TextInput placeholder="Phone or Email" 
+								value={this.state.email}
+								onChangeText={text => this.handleEmail(text)}
 								onFocus={this.changeUsernameIn} 
 								onBlur={this.changeUsernameOut} 
 								style={[stylesBody.form, this.state.inputUsername ? { borderBottomColor: '#3B5998', borderBottomWidth: 2 } : {}]}/>
 								
-								<TextInput placeholder="Password" secureTextEntry={true} 
+								<TextInput placeholder="Password" secureTextEntry={true}
+								value={this.state.password}
+								onChangeText={text => this.handlePassword(text)}
 								onFocus={this.changePasswordIn} 
 								onBlur={this.changePasswordOut} 
 								style={[stylesBody.form, this.state.inputPassword ? { borderBottomColor: '#3B5998', borderBottomWidth: 2 } : {}]}/>
 							</View>
 
 							<View style={stylesBody.wrapperBtnLogin}>
-								<Button title="Login" color="#3B5998" onPress={() => this.goToMarket()}/>
+								<Button title="Login" color="#3B5998" onPress={this.goToAuth}/>
 							</View>
 
 							{this.renderPartials()}

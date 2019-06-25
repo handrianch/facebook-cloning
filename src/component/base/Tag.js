@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, ScrollView, Image, Text } from 'react-native';
+import { View, ScrollView, Image, Text, StyleSheet } from 'react-native';
 import TagItem from '../small/TagItem';
 
 class Tag extends Component {
@@ -9,7 +9,7 @@ class Tag extends Component {
 	
 	render() {
 		return (
-			<View style={{ height: 70, borderBottomWidth: 2, borderBottomColor: '#e3e3e3', flex: 1 }}>
+			<View style={styles.wrapper}>
 				<ScrollView horizontal={true} showsHorizontalScrollIndicator={false} alwaysBounceHorizontal={true}>
 					<View style={{ flex: 1, flexDirection: 'row'}}>
 						<View style={{ flex: 1, justifyContent: 'center' , alignItems: 'center', marginHorizontal: 6, marginLeft: 20}}>
@@ -30,3 +30,7 @@ class Tag extends Component {
 }
 
 export default Tag;
+
+const styles = StyleSheet.create({
+	wrapper: { height: 70, borderBottomWidth: 2, borderBottomColor: '#e3e3e3', flex: 1 }
+})

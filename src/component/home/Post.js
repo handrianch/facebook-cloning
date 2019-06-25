@@ -29,14 +29,15 @@ class Post extends Component {
 	btnMorePressed 		= () => this.setState({btnMore: !this.state.btnMore});
 
 	render() {
+		const { user, posts, createdAt } = this.props.data
 		return(
 			<View style={styles.container}>
 				<TouchableWithoutFeedback onPressIn={this.topPartPressed} onPressOut={this.topPartPressed}>
 					<View style={[styles.wrapperTopPart, this.state.topPart ? {backgroundColor: '#ebebeb'} : {}]}>
-						<ThumbnailPhoto image={this.props.data.image} style={styles.wrapperPhotoProfile} />
+						<ThumbnailPhoto image={user.avatar} style={styles.wrapperPhotoProfile} />
 						
 						<View style={styles.wrapperProfileName}>
-							<Text style={styles.profileName}>{this.props.data.name}</Text>
+							<Text style={styles.profileName}>{user.name}</Text>
 							<Text style={styles.timePost}>{this.props.data.minute}</Text>
 						</View>
 						<TouchableWithoutFeedback onPressIn={this.btnMorePressed} onPressOut={this.btnMorePressed}>
@@ -49,7 +50,7 @@ class Post extends Component {
 
 				<View style={styles.wrapperMiddlePart}>
 					<View style={styles.wrapperPost}>
-						<Text style={styles.postText}>{this.props.data.text}</Text>
+						<Text style={styles.postText}>{posts}</Text>
 						<TouchableWithoutFeedback onPressIn={this.bottomPartPressed} onPressOut={this.bottomPartPressed}>
 							<View style={[styles.wrapperInfoPart, this.state.bottomPart ? {backgroundColor: '#ebebeb'} : {}]}>
 							<View style={[styles.InfoPart, {flexDirection: 'row'}]}>
@@ -59,7 +60,7 @@ class Post extends Component {
 											<Icon size={15} color="#fff" name='thumb-up' type='material-community'/>
 										</View>
 										:
-										<View></View>
+										<View style={styles.wrapperIcon} />
 								}
 
 								{
@@ -68,7 +69,7 @@ class Post extends Component {
 											<Icon size={15} color="#ff0000" name='heart' type='material-community'/>
 										</View>
 										:
-										<View></View>
+										<View style={[{ marginLeft: -8 }, styles.wrapperIcon]} />
 								}
 								
 								<Text style={styles.infoText}>{this.props.data.like } 
@@ -112,7 +113,7 @@ const styles = StyleSheet.create({
 	wrapperPhotoProfile: { width: 50, height: 50, padding: 5 },
 	photoProfile: { width: '100%', height: '100%', borderRadius: 100 },
 	wrapperProfileName: { flex: 1, height: 50, marginTop: 5 },
-	profileName: { fontSize: 20, color: '#000', fontWeight: 'bold' },
+	profileName: { fontSize: 20, color: '#000', fontWeight: 'bold', textTransform: 'capitalize' },
 	timePost: { fontSize: 10, marginTop: -2 },
 	btnMore: { justifyContent: 'center', alignItems: 'center', width: 40,  height: 50, padding: 5, height: 39, borderRadius: 100},
 	wrapperMiddlePart: { 

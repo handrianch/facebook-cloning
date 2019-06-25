@@ -20,7 +20,7 @@ class ActionBar extends Component {
 		{
 			active: require('../../assets/icons/group-active.png'),
 			unactive: require('../../assets/icons/group.png'),
-			page: 'fb.home'
+			page: 'fb.groups'
 		},
 		{
 			active: require('../../assets/icons/profile-active.png'),

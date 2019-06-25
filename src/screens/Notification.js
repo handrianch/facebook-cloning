@@ -4,7 +4,7 @@ import StatusBar from '../component/base/StatusBar';
 import TopBar from '../component/base/TopBar';
 import CardNotification from '../component/notification/CardNotification';
 import TitleNotification from '../component/notification/TitleNotification';
-import FriendRequestsData from '../data/friendRequests.json';
+import Notification from '../data/notification.json';
 
 class FriendRequests extends Component {
 	render() {
@@ -17,7 +17,7 @@ class FriendRequests extends Component {
 					<TitleNotification title="earlier" />
 
 					<FlatList
-						data={FriendRequestsData}
+						data={Notification}
 						renderItem={({item}) => <CardNotification data={item} />}
 						keyExtractor={(item) => item.id}
 					/>

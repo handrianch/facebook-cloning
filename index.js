@@ -12,7 +12,7 @@ Navigation.events().registerAppLaunchedListener(() => {
       	children : [
       		{
       			component: {
-      				name: 'fb.login'
+      				name: 'fb.splashscreen'
       			}
       		}
       	]

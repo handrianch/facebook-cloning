@@ -56,7 +56,7 @@ class ActionMenu extends Component {
 			<TouchableWithoutFeedback onPressIn={this.boxPressed} onPressOut={this.boxPressed}>
 				<View style={[styles.wrapperIcon, this.state.menuPressed ? {backgroundColor: '#ebebeb'} : {}]}>
 					<Image source={this.state.menuPressed ? this.props.data.active : this.props.data.unactive}
-					style={this.state.menuPressed ? { width: '70%', height: '70%'} : { width: '80%', height: '80%'}} />
+					style={this.state.menuPressed ? { width: '60%', height: '60%'} : { width: '70%', height: '70%'}} />
 				</View>
 			</TouchableWithoutFeedback>
 		)
@@ -73,8 +73,8 @@ const styles = StyleSheet.create({
 		padding: 5,
 	},
 	icon : {
-		width: '40%', 
-		height: '40%',
+		width: '35%', 
+		height: '35%',
 		backgroundColor: '#000000'
 	},
 	menuPressedIn: {
