@@ -19,6 +19,14 @@ const storageData = {
 			console.error(e);
 			return null;
 		}
+	},
+	async removeKey(key) {
+		try {
+			await AsyncStorage.removeItem(key);
+		} catch(e) {
+			console.error(e);
+			return null;
+		}
 	}
 }
 

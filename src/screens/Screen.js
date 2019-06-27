@@ -7,6 +7,7 @@ import Notification from './Notification';
 import More from './More';
 import Market from './Market';
 import SplashScreen from './SplashScreen';
+import CreateStatus from './CreateStatus';
 
 export default function registerScreens() {
 	Navigation.registerComponent('fb.login', () => Login);
@@ -17,6 +18,7 @@ export default function registerScreens() {
 	Navigation.registerComponent('fb.groups', () => Groups);
 	Navigation.registerComponent('fb.market', () => Market);
 	Navigation.registerComponent('fb.splashscreen', () => SplashScreen);
+	Navigation.registerComponent('fb.createStatus', () => CreateStatus);
 }
 
 Navigation.setDefaultOptions({

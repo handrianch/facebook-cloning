@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, TextInput, Button, TouchableWithoutFeedback, Modal } from 'react-native';
+import { View, Text, StyleSheet, TextInput, Button, TouchableWithoutFeedback, Modal, Alert } from 'react-native';
 import axios from 'axios';
 import StatusBar from '../component/base/StatusBar';
 import { Navigation } from 'react-native-navigation';
@@ -9,6 +9,7 @@ import Head2 from './../component/login/Head2';
 import stylesHead1 from './../style/login/styleHead1';
 import stylesBody from './../style/login/styleBody';
 import { AsyncStorage } from 'react-native';
+import config from '../service/config';
 
 class Login extends Component {
 	constructor(props) {
@@ -77,7 +78,7 @@ class Login extends Component {
 	}
 
 	goToAuth = () => {
-		axios.post('http://192.168.0.19:3000/auth', {
+		axios.post(`${config.host}/auth`, {
 			email: this.state.email,
 			password: this.state.password
 		})
@@ -169,7 +170,15 @@ class Login extends Component {
 					{/* wrapper main konten*/}
 					<View style={stylesBody.wrapperKonten}>
 						<View>
-							{this.state.loginFailed ? <Text>Login Failed</Text> : <Text></Text> }
+							{this.state.loginFailed ? 
+								Alert.alert('Login Failed', 'Please check again your credentials', [
+									{
+										text: 'OK', onPress: () => this.setState({loginFailed: false})
+									}
+								])
+								: 
+								<View />
+							}
 							<View>
 								<TextInput placeholder="Phone or Email" 
 								value={this.state.email}

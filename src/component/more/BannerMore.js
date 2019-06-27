@@ -18,10 +18,10 @@ class BannerMore extends Component {
 				<View style={[this.state.wrapperPressed ? styles.wrapperPressed : {}, styles.wrapper]}>
 					<View style={styles.banner}>
 						<View style={styles.wrapperImage}>
-							<ThumbnailPhoto image="https://randomuser.me/api/portraits/men/5.jpg" style={styles.image} />
+							<ThumbnailPhoto image={this.props.avatar} style={styles.image} />
 						</View>
 						<View style={styles.wrapperText}>
-							<Text style={styles.profileName}>Candra Handrian</Text>
+							<Text style={styles.profileName}>{this.props.name}</Text>
 							<Text style={styles.info}>View Your Profile</Text>
 						</View>
 					</View>
@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
 		height: '70%',
 	},
 	wrapperText : { flex: 1, justifyContent: 'center'},
-	profileName: { fontSize: 18, color: 'black' },
+	profileName: { fontSize: 18, color: 'black', textTransform: 'capitalize' },
 	info: { fontSize: 12 },
 	wrapperBorder : { flex: 1, paddingHorizontal: 15 },
 	border: { borderBottomWidth: 1, borderBottomColor: '#ebebeb'  }

@@ -5,6 +5,8 @@ import ScreenRegister from './src/screens/Screen';
 
 ScreenRegister();
 
+console.disableYellowBox = true;
+
 Navigation.events().registerAppLaunchedListener(() => {
   Navigation.setRoot({
     root: {

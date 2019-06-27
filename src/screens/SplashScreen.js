@@ -8,23 +8,46 @@ class SplashScreen extends Component {
 	constructor(props) {
 		super(props);
 		
-		this.state = {
-			token: 'token bre',
-		}
+		// this.state = {
+		// 	token: '',
+		// }
 
-		let promiseToken = storageData.getKey('id_token');
+		// let promiseToken = storageData.getKey('id_token');
 	    
-	    promiseToken.then(token => {
-	   		if(token) {
-	   			this._navigate('home')
-	   			return;
-	   		}
-	   		this._navigate('login')
-	   	})
-	   .catch(err => {
-	   		console.error(err);
-	   });
+	 //    promiseToken.then(token => {
+	 //   		if(token) {
+	 //   			this._navigate('home')
+	 //   			return;
+	 //   		}
+	 //   		this._navigate('login')
+	 //   	})
+	 //   .catch(err => {
+	 //   		console.error(err);
+	 //   });
 	   
+	}
+
+	componentDidMount() {
+		this.navigationEventListener = Navigation.events().bindComponent(this);
+	}
+
+	componentWillUnmount() {
+		if(this.navigationEventListener) {
+			this.navigationEventListener.remove();
+		}
+	}
+
+	async componentDidAppear() {
+		try {
+			const token = await storageData.getKey('id_token');
+			if(token) {
+				this._navigate('home');
+			} else {
+				this._navigate('login');
+			}
+		} catch(err) {
+			console.error(err);
+		}
 	}
 
 	_navigate = (page) => {

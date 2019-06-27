@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, StyleSheet, Text, Image, TouchableWithoutFeedback } from 'react-native';
 import { Navigation } from 'react-native-navigation';
+import storageData from '../../service/storageData';
 
 class Element extends React.PureComponent {
 	constructor(props) {
@@ -18,10 +19,20 @@ class Element extends React.PureComponent {
 		});
 	}
 
+	logout = async () => {
+		await storageData.removeKey("id_token");
+		Navigation.popToRoot(this.props.componentId);
+	}
+
 	toCapitalize = text => text.slice(0, 1).toUpperCase() + text.slice(1)
 
 	backgroundPresed = () => {
 		this.setState({wrapperPressed: !this.state.wrapperPressed})
+
+		if(this.props.typeAction == "logout") {
+			this.logout();
+		}
+
 		this.movePage();
 	}
 

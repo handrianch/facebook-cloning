@@ -1,11 +1,23 @@
 import React, { Component } from 'react';
-import { View, Text, ScrollView, StyleSheet, FlatList } from 'react-native';
+import { View, Text, ScrollView, StyleSheet, FlatList, TouchableWithoutFeedback } from 'react-native';
+import axios from 'axios';
 import StatusBar from '../component/base/StatusBar';
 import TopBar from '../component/base/TopBar';
 import BannerMore from '../component/more/BannerMore';
 import Element from '../component/more/Element';
+import storageData from '../service/storageData';
+import config from '../service/config';
 
 class More extends Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			jwt: '',
+			avatar: "https://walyou.com/wp-content/uploads//2010/12/facebook-profile-picture-no-pic-avatar.jpg",
+			name: '',
+		}
+	}
+
 	icons = [
 		{
 			name: 'marketplace',
@@ -57,6 +69,29 @@ class More extends Component {
 		},
 	]
 
+	async componentDidMount() {
+		try {
+			let token = await storageData.getKey('id_token');
+			this.setState({jwt: `Bearer ${token}`});
+
+			let headers = {headers: {"Authorization": this.state.jwt}}
+
+			let { data: profile } = await axios.get(`${config.host}/profile`, headers)
+			let avatar = profile.avatar;
+			let name = profile.name
+			this.setState({name, avatar});
+
+			if(this.props.postId) {
+				let { data } = await axios.get(`${config.host}/posts/${this.props.postId}`, headers)
+				this.setState({statusText: data.posts});
+			}
+
+		} catch(err) {
+			console.error(err);
+		}
+	}
+
+
 	render() {
 		return (
 			<View style={styles.container}>
@@ -64,12 +99,14 @@ class More extends Component {
 				<TopBar componentId={this.props.componentId} />
 
 				<ScrollView>
-					<BannerMore />
+					<BannerMore name={this.state.name} avatar={this.state.avatar} />
 					<FlatList
 						data={this.icons}
 						renderItem={({item}) => <Element data={item} />}
 						keyExtractor={(item) => item.name}
 					/>
+					
+					<Element componentId={this.props.componentId} data={{icon: require('../assets/icons/logout.png'), name: 'Logout'}} typeAction="logout" />
 				</ScrollView>
 			</View>
 		)

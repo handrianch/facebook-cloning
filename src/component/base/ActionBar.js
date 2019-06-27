@@ -43,9 +43,9 @@ class ActionBar extends Component {
 		return (
 			<View style={styles.wrapperActionMenu}>
 				{
-					this.icon.map(item => {
+					this.icon.map((item, key) => {
 						return (
-							<ActionMenu componentId={this.props.componentId} data={item} />
+							<ActionMenu key={key} componentId={this.props.componentId} data={item} />
 						)
 					})
 				}
