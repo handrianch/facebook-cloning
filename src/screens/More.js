@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, ScrollView, StyleSheet, FlatList, TouchableWithoutFeedback } from 'react-native';
+import { Navigation } from 'react-native-navigation';
 import axios from 'axios';
 import StatusBar from '../component/base/StatusBar';
 import TopBar from '../component/base/TopBar';
@@ -69,7 +70,17 @@ class More extends Component {
 		},
 	]
 
-	async componentDidMount() {
+	componentDidMount() {
+		this.navigationEventListener = Navigation.events().bindComponent(this);
+	}
+
+	componentWillUnmount() {
+		if(this.navigationEventListener) {
+			this.navigationEventListener.remove();
+		}
+	}
+
+	async componentDidAppear() {
 		try {
 			let token = await storageData.getKey('id_token');
 			this.setState({jwt: `Bearer ${token}`});
@@ -87,10 +98,10 @@ class More extends Component {
 			}
 
 		} catch(err) {
-			console.error(err);
+			await storageData.removeKey('id_token');
+			Navigation.popToRoot(this.props.componentId);
 		}
 	}
-
 
 	render() {
 		return (

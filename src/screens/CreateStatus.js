@@ -41,7 +41,8 @@ class CreateStatus extends Component {
 			}
 
 		} catch(err) {
-			console.error(err);
+			await storageData.removeKey('id_token');
+			Navigation.popToRoot(this.props.componentId);
 		}
 	}
 

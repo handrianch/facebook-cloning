@@ -24,22 +24,29 @@ class Login extends Component {
 			email: '',
 			password: '',
 			loginFailed: false,
-			token: '',
 		}
-		
-		let promiseToken = storageData.getKey('id_token');
-		promiseToken.then(token => {
-	   		if(token) {
+	}
+
+	componentDidMount() {
+		this.navigationEventListener = Navigation.events().bindComponent(this);
+	}
+
+	componentWillUnmount() {
+		if(this.navigationEventListener) {
+			this.navigationEventListener.remove();
+		}
+	}
+
+	async componentDidAppear() {
+		try {
+			let token = await storageData.getKey('id_token');
+			if(token) {
 	   			this._navigate('home')
 	   			return;
-	   		}
-	   	})
-	   .catch(err => {
-	   		console.error(err);
-	   });
-
-		email = this.state.email;
-		password = this.state.password;
+	   		}	
+		} catch (err) {
+			console.error(err);
+		}
 	}
 
 	changeUsernameIn = () => {
@@ -85,7 +92,14 @@ class Login extends Component {
 		.then(response => {
 			this.setState({loginFailed: false})
 			storageData.saveKey("id_token", response.data.token);
-			this._navigate();
+			// this._navigate();
+			Navigation.setStackRoot(this.props.componentId, [
+				{
+					component: {
+						name: 'fb.home'
+					}
+				}
+			]);
 		})
 		.catch(err => {
 			this.setState({loginFailed: true})

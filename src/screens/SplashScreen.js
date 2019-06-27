@@ -7,24 +7,6 @@ import storageData from '../service/storageData';
 class SplashScreen extends Component {
 	constructor(props) {
 		super(props);
-		
-		// this.state = {
-		// 	token: '',
-		// }
-
-		// let promiseToken = storageData.getKey('id_token');
-	    
-	 //    promiseToken.then(token => {
-	 //   		if(token) {
-	 //   			this._navigate('home')
-	 //   			return;
-	 //   		}
-	 //   		this._navigate('login')
-	 //   	})
-	 //   .catch(err => {
-	 //   		console.error(err);
-	 //   });
-	   
 	}
 
 	componentDidMount() {

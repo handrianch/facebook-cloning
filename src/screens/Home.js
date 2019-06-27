@@ -48,6 +48,7 @@ class Home extends Component {
 	loadFeeds = async () => {
 		try {
 			let token = await storageData.getKey('id_token');
+
 			this.setState({jwt: token});
 
 			let headers = {headers: {"Authorization": `Bearer ${token}`}}
@@ -59,7 +60,8 @@ class Home extends Component {
 			let { data: feeds } = await axios.get(`${config.host}/posts`, headers);
 			this.setState({feeds});
 		} catch(err) {
-			console.log(err);
+			await storageData.removeKey('id_token');
+			Navigation.popToRoot(this.props.componentId);
 		}
 	}
 
