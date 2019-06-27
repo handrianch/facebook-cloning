@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { View, Text, ScrollView, StyleSheet, Image, TextInput, FlatList, Modal, TouchableWithoutFeedback, AsyncStorage } from 'react-native';
+import { View, Text, ScrollView, StyleSheet, Image, TextInput, FlatList, Modal, TouchableWithoutFeedback, AsyncStorage, 
+	     ActivityIndicator } from 'react-native';
 import { Icon } from 'react-native-elements';
 import { Navigation } from 'react-native-navigation';
 import axios from 'axios';
@@ -23,7 +24,8 @@ class Home extends Component {
 			boxStatus: false,
 			statusText: '',
 			text: '',
-			createFeed: false
+			createFeed: false,
+			isLoading: true,
 		}
 	}
 
@@ -58,7 +60,7 @@ class Home extends Component {
 			this.setState({profile, avatar});
 
 			let { data: feeds } = await axios.get(`${config.host}/posts`, headers);
-			this.setState({feeds});
+			this.setState({feeds, isLoading: false});
 		} catch(err) {
 			await storageData.removeKey('id_token');
 			Navigation.popToRoot(this.props.componentId);
@@ -101,7 +103,12 @@ class Home extends Component {
 							{ dataStory.map(item => <Story data={item} />) }
 						</ScrollView>
 					</View>
-
+					{
+						this.state.isLoading ?
+						<ActivityIndicator style={{marginBottom: 15}} size="large" color="#0000ff" />
+						:
+						<View />
+					}
 					<FlatList 
 						data={this.state.feeds}
 						renderItem={( {item} ) => <Post componentId={this.props.componentId} data={item} refreshFeeds={this.loadFeeds} token={this.state.jwt} userId={this.state.profile.id}/> }
