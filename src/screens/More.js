@@ -117,7 +117,7 @@ class More extends Component {
 						keyExtractor={(item) => item.name}
 					/>
 					
-					<Element componentId={this.props.componentId} data={{icon: require('../assets/icons/logout.png'), name: 'Logout'}} typeAction="logout" />
+					<Element componentId={this.props.componentId} data={{icon: require('../assets/icons/logout.png'), name: 'logout'}} typeAction="logout" />
 				</ScrollView>
 			</View>
 		)

@@ -12,11 +12,11 @@ class Element extends React.PureComponent {
 	}
 
 	movePage = () => {
-		Navigation.push(this.props.componentId, {
-			component: {
-				name: 'fb.market'
-			}
-		});
+		// Navigation.push(this.props.componentId, {
+		// 	component: {
+		// 		name: 'fb.market'
+		// 	}
+		// });
 	}
 
 	logout = async () => {
@@ -45,7 +45,9 @@ class Element extends React.PureComponent {
 					</View>
 
 					<View style={styles.wrapperTitle}>
-						<Text style={styles.title}>{this.toCapitalize(this.props.data.name)}</Text>
+						<Text style={styles.title}>
+							{this.toCapitalize(this.props.data.name)}
+						</Text>
 					</View>
 				</View>
 			</TouchableWithoutFeedback>

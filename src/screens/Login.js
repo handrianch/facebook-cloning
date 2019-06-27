@@ -24,6 +24,7 @@ class Login extends Component {
 			email: '',
 			password: '',
 			loginFailed: false,
+			test: config.host,
 		}
 	}
 
