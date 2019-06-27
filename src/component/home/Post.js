@@ -53,16 +53,20 @@ class Post extends Component {
 			          	<IconMenuMore image={this.state.images.savePost} style={{borderTopLeftRadius: 5, borderTopRightRadius: 5}} title="Save post" subtitle="Add this to your saved items" />
 				          {
 				          	this.props.userId == user_id ? 
-				          		<IconMenuMore componentId={this.props.componentId} closeModal={this.closeModal} image={this.state.images.editPost} typeAction="update" title="Edit post" token={this.props.token} userId={this.props.userId} postId={id} />
+				          		<IconMenuMore componentId={this.props.componentId} 
+				          		closeModal={this.closeModal} image={this.state.images.editPost} 
+				          		typeAction="update" title="Edit post" token={this.props.token} 
+				          		userId={this.props.userId} postId={id} />
 				          		:
 				          		<View />
 				          }
 				        <IconMenuMore image={this.state.images.hide} title="Hide From Timeline" />
 				          {
 				          	this.props.userId == user_id ? 
-				          		<IconMenuMore componentId={this.props.componentId} closeModal={this.closeModal} 
-				          		image={this.state.images.delete} typeAction="delete" title="Delete" 
-				          		token={this.props.token} userId={this.props.userId} postId={id} />
+				          		<IconMenuMore componentId={this.props.componentId} 
+				          		closeModal={this.closeModal} image={this.state.images.delete} 
+				          		typeAction="delete" title="Delete" token={this.props.token} 
+				          		userId={this.props.userId} postId={id} />
 				          		:
 				          		<View />	
 				          }

@@ -92,7 +92,6 @@ class Login extends Component {
 		.then(response => {
 			this.setState({loginFailed: false})
 			storageData.saveKey("id_token", response.data.token);
-			// this._navigate();
 			Navigation.setStackRoot(this.props.componentId, [
 				{
 					component: {
