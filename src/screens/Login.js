@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, TextInput, Button, TouchableWithoutFeedback, Modal, Alert } from 'react-native';
+import { View, Text, StyleSheet, TextInput, Button, TouchableWithoutFeedback, Modal, Alert, Keyboard } from 'react-native';
 import axios from 'axios';
 import StatusBar from '../component/base/StatusBar';
 import { Navigation } from 'react-native-navigation';
@@ -24,18 +24,26 @@ class Login extends Component {
 			email: '',
 			password: '',
 			loginFailed: false,
-			test: config.host,
+			test: '',
+			statusMessage: ''
 		}
 	}
 
 	componentDidMount() {
 		this.navigationEventListener = Navigation.events().bindComponent(this);
+		this.keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', this.keyboardDidHide);
 	}
 
 	componentWillUnmount() {
 		if(this.navigationEventListener) {
 			this.navigationEventListener.remove();
 		}
+		this.keyboardDidHideListener.remove();
+	}
+
+	keyboardDidHide = () => {
+		Keyboard.dismiss();
+		this.setState({changeHeader: false});
 	}
 
 	async componentDidAppear() {
@@ -102,7 +110,7 @@ class Login extends Component {
 			]);
 		})
 		.catch(err => {
-			this.setState({loginFailed: true})
+			this.setState({loginFailed: true, statusMessage: err.response.data.statusMessage})
 		})
 	}
 
@@ -185,7 +193,7 @@ class Login extends Component {
 					<View style={stylesBody.wrapperKonten}>
 						<View>
 							{this.state.loginFailed ? 
-								Alert.alert('Login Failed', 'Please check again your credentials', [
+								Alert.alert('Login Failed', this.state.statusMessage, [
 									{
 										text: 'OK', onPress: () => this.setState({loginFailed: false})
 									}

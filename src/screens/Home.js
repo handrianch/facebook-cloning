@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, ScrollView, StyleSheet, Image, TextInput, FlatList, Modal, TouchableWithoutFeedback, AsyncStorage, 
-	     ActivityIndicator } from 'react-native';
+	     ActivityIndicator, RefreshControl } from 'react-native';
 import { Icon } from 'react-native-elements';
 import { Navigation } from 'react-native-navigation';
 import axios from 'axios';
@@ -26,6 +26,7 @@ class Home extends Component {
 			text: '',
 			createFeed: false,
 			isLoading: true,
+			refreshing: false,
 		}
 	}
 
@@ -60,7 +61,7 @@ class Home extends Component {
 			this.setState({profile, avatar});
 
 			let { data: feeds } = await axios.get(`${config.host}/posts`, headers);
-			this.setState({feeds, isLoading: false});
+			this.setState({feeds, isLoading: false, refreshing: false});
 		} catch(err) {
 			await storageData.removeKey('id_token');
 			Navigation.popToRoot(this.props.componentId);
@@ -76,13 +77,19 @@ class Home extends Component {
 		});
 	}
 
-	boxStatusPressOut = () => this.setState({boxStatus: !this.state.boxStatus})
+	boxStatusPressOut = () => this.setState({boxStatus: !this.state.boxStatus});
+	_onRefresh = () => {
+		this.setState({refreshing: true});
+		this.loadFeeds();
+	}
 
 	render() {
 		return (
 			<View style={{flex: 1, backgroundColor: '#dadee1'}}>
 				<TopBar componentId={this.props.componentId}/>
-				<ScrollView>
+				<ScrollView refreshControl={
+					<RefreshControl refreshing={this.state.refreshing} onRefresh={this._onRefresh} />
+				}>
 					{/*<Text>{this.state.test}</Text>*/}
 					<TouchableWithoutFeedback onPressIn={this.boxStatusPressIn} onPressOut={this.boxStatusPressOut}>
 						<View style={[styles.wrapperStatus, this.state.boxStatus ? {backgroundColor: '#ebebeb'} : {}]}>
@@ -123,18 +130,74 @@ class Home extends Component {
 export default Home;
 
 const styles = StyleSheet.create({
-	wrapperStatus: { flex: 1, backgroundColor: '#fff', marginTop: 2, flexDirection: 'row', height: 70, padding: 15},
-	statusForm: { borderWidth: 1, borderColor: '#a0a0a0', height: '100%', borderRadius: 20, justifyContent: 'center', paddingLeft: 15 },
-	wrapperImage: { width: 40, justifyContent: 'center', alignItems: 'center', marginTop: 3},
-	image: { width: '52%', height: '55%', marginBottom: 2 },
-	wrapperStory: { flex: 1, flexDirection: 'row', backgroundColor: '#fff', marginVertical: 15, height: 220}
+	wrapperStatus: { 
+		flex: 1, 
+		backgroundColor: '#fff', 
+		marginTop: 2, 
+		flexDirection: 'row', 
+		height: 70, 
+		padding: 15
+	},
+	statusForm: { 
+		borderWidth: 1, 
+		borderColor: '#a0a0a0', 
+		height: '100%', 
+		borderRadius: 20, 
+		justifyContent: 'center', 
+		paddingLeft: 15 
+	},
+	wrapperImage: { 
+		width: 40, 
+		justifyContent: 'center', 
+		alignItems: 'center', 
+		marginTop: 3
+	},
+	image: { 
+		width: '52%',
+		height: '55%', 
+		marginBottom: 2 
+	},
+	wrapperStory: { 
+		flex: 1, 
+		flexDirection: 'row', 
+
+		backgroundColor: '#fff', 
+		marginVertical: 15, 
+		height: 220}
 })
 
 const stylesModalStatus = StyleSheet.create({
-	container: { flex: 1, height: '100%' },
-	wrapper: { flex: 1, backgroundColor: '#fff'},
-	header: { height: 50, flexDirection: 'row' },
-	backBtn: { width: 50, height: 50, justifyContent: 'center', alignItems: 'center', backgroundColor: '#4167b0' },
-	title: { flex: 1, height: 50, justifyContent: 'center', paddingLeft: 5,backgroundColor: '#4167b0'},
-	postBtn: { width: 50, height: 50, justifyContent: 'center', alignItems: 'center', backgroundColor: '#4167b0' }
-})
+	container: { 
+		flex: 1, 
+		height: '100%' 
+	},
+	wrapper: { 
+		flex: 1, 
+		backgroundColor: '#fff'
+	},
+	header: { 
+		height: 50, 
+		flexDirection: 'row' 
+	},
+	backBtn: { 
+		width: 50, 
+		height: 50, 
+		justifyContent: 'center', 
+		alignItems: 'center', 
+		backgroundColor: '#4167b0' 
+	},
+	title: { 
+		flex: 1, 
+		height: 50, 
+		justifyContent: 'center', 
+		paddingLeft: 5,
+		backgroundColor: '#4167b0'
+	},
+	postBtn: { 
+		width: 50, 
+		height: 50, 
+		justifyContent: 'center', 
+		alignItems: 'center', 
+		backgroundColor: '#4167b0' 
+	}
+});
