@@ -50,7 +50,7 @@ class Login extends Component {
 		try {
 			let token = await storageData.getKey('id_token');
 			if(token) {
-	   			this._navigate('home')
+	   			this._navigate()
 	   			return;
 	   		}	
 		} catch (err) {
@@ -95,7 +95,7 @@ class Login extends Component {
 
 	goToAuth = () => {
 		axios.post(`${config.host}/auth`, {
-			email: this.state.email,
+			username: this.state.email,
 			password: this.state.password
 		})
 		.then(response => {
@@ -104,7 +104,7 @@ class Login extends Component {
 			Navigation.setStackRoot(this.props.componentId, [
 				{
 					component: {
-						name: 'fb.home'
+						name: 'chat'
 					}
 				}
 			]);
@@ -117,7 +117,7 @@ class Login extends Component {
 	_navigate = () => {
 		Navigation.push(this.props.componentId, {
 			component: {
-				name: 'fb.home'
+				name: 'chat'
 			}
 		});
 	}

@@ -8,6 +8,7 @@ import More from './More';
 import Market from './Market';
 import SplashScreen from './SplashScreen';
 import CreateStatus from './CreateStatus';
+import Chat from './Chat';
 
 export default function registerScreens() {
 	Navigation.registerComponent('fb.login', () => Login);
@@ -19,6 +20,7 @@ export default function registerScreens() {
 	Navigation.registerComponent('fb.market', () => Market);
 	Navigation.registerComponent('fb.splashscreen', () => SplashScreen);
 	Navigation.registerComponent('fb.createStatus', () => CreateStatus);
+	Navigation.registerComponent('chat', () => Chat);
 }
 
 Navigation.setDefaultOptions({
