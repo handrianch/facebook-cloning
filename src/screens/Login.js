@@ -111,6 +111,7 @@ class Login extends Component {
 		})
 		.catch(err => {
 			this.setState({loginFailed: true, statusMessage: err.response.data.statusMessage})
+			console.error('error mang');
 		})
 	}
 

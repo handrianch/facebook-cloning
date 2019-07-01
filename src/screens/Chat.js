@@ -1,5 +1,16 @@
 import React, { Component } from 'react';
-import { View, Text, TextInput, Button, FlatList, ScrollView, TouchableWithoutFeedback, StyleSheet, Keyboard } from 'react-native';
+import { View, 
+	     Text, 
+	     TextInput, 
+	     Button, 
+	     FlatList, 
+	     ScrollView, 
+	     TouchableWithoutFeedback, 
+	     StyleSheet, 
+	     Keyboard, 
+	     Alert 
+	 } from 'react-native';
+import ReversedFlatList from 'react-native-reversed-flat-list';
 import { Navigation } from 'react-native-navigation';
 import axios from 'axios';
 import storageData from '../service/storageData';
@@ -144,13 +155,14 @@ class Chat extends Component {
 								{ justifyContent: 'center', alignItems: 'center', height: '100%'}, 
 								this.state.logoutPressed ? {backgroundColor: '#ebebeb'} : {}]}>
 								<Icon name="power-settings" color="#000" type="material-community"/>
+								<Text>Logout</Text>
 							</View>
 						</TouchableWithoutFeedback>
 					</View>
 				</View>
 				<View style={[{ height: '80%', padding: 5, paddingTop: 0 }, this.state.keyboardToggle ? {height: '48%'} : {}]}>
 					<ScrollView>
-						<FlatList 
+						<ReversedFlatList
 						data={this.state.chats}
 						renderItem={({item}) => <Buble onEditPressed={this.editHandler} token={this.state.jwt} data={item} profile={this.state.profile} />}
 						/>
@@ -178,6 +190,7 @@ class Buble extends Component {
 			showBtn: false,
 			test: '',
 			editPressed: false,
+			deletePressed: false,
 		}
 	}
 	
@@ -191,15 +204,13 @@ class Buble extends Component {
 		let headers = {headers: {"Authorization": `Bearer ${this.props.token}`}}
 		axios.delete(`${config.host}/chats/${this.props.data.id}`, headers)
 		     .then(response => {
-
-		     })
-		     .catch(err => {
-
-		     })
+		     	this.setState({showBtn: false});
+		     });
 	}
 
 	editChat = () => {
-		this.setState({editPressed: true})
+		this.setState({editPressed: true});
+		this.setState({showBtn: false});
 		this.props.onEditPressed(this.props.data.chat, 'patch', this.props.data.id);
 	}
 
@@ -212,8 +223,8 @@ class Buble extends Component {
 							{this.props.data.user.username} :
 						</Text>
 						<View style={{ flex: 1 }}>
-							<Text style={{ flex: 1, fontSize: 15, backgroundColor: 'yellow' }}>{this.props.data.chat}</Text>
-							<TimeAgo style={{ flex: 0.5, backgroundColor: 'green', fontSize: 10 }} time={this.props.data.createdAt} interval={20000} formatter="minute"/>
+							<Text style={{ flex: 1, fontSize: 15 }}>{this.props.data.chat}</Text>
+							<TimeAgo style={{ flex: 0.5, fontSize: 10 }} time={this.props.data.createdAt} interval={20000} formatter="minute"/>
 						</View>
 					</View>
 					{
@@ -225,9 +236,11 @@ class Buble extends Component {
 								</View>
 							</TouchableWithoutFeedback>
 
-							<View style={{ width: '20%', alignItems: 'center', justifyContent: 'center'}}>
-								<Icon name="delete-forever" type="material-community" color="red" />
-							</View>
+							<TouchableWithoutFeedback onPressIn={this.deleteChat} onPressOut={() => this.setState({deletePressed: false})}>
+								<View style={[{ width: '20%', alignItems: 'center', justifyContent: 'center'}, this.state.deletePressed ? {backgroundColor: '#ebebeb'} : {}]}>
+									<Icon name="delete-forever" type="material-community" color="red" />
+								</View>
+							</TouchableWithoutFeedback>
 						</View>
 						:
 						<View />
@@ -235,6 +248,20 @@ class Buble extends Component {
 					
 				</View>
 			</TouchableWithoutFeedback>
+		)
+	}
+}
+
+class AlertConfirm extends Component {
+	render() {
+		return (
+			Alert.alert(this.props.title, this.props.message,
+			  [
+			    {text: 'Oke', onPress: () => console.log('Ask me later pressed')},
+			    {text: 'Cancel', onPress: () => console.log('Cancel Pressed')},
+			    {text: 'OK', onPress: () => console.log('OK Pressed')},
+			  ]
+			)
 		)
 	}
 }
